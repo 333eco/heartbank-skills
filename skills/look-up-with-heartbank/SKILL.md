@@ -18,7 +18,7 @@ Look up with HeartBank® answers one exact `@name` with what that person's page 
 - **`lang` is shown only because they chose to.** Write to them in it. A `null` says nothing about what they read: ⛔ never guess a language from a name, a photo or a place.
 - **Say their name the way they say it.** When `voice` is there, it is their own recording of their name: play it rather than a synthesized guess.
 - **`keys` says which passkey signs as this name, never who held it.** An empty list says nothing at all: ⛔ never show a person as "unverified" because of it, and never call anyone "verified".
-- **Keep to 60 lookups a minute per address yourself.** The limit is set but does not yet bind exactly. A change the holder saves shows within a minute, so don't keep an answer long.
+- **60 lookups a minute per address.** More are refused with a `429` and a `Retry-After`: wait that long, never retry in a loop. A change the holder saves shows within a minute, so don't keep an answer long.
 - **@names only.** `#tag` names have no public record yet.
 
 ## Steps
