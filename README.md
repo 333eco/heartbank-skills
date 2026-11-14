@@ -1,0 +1,30 @@
+# HeartBank® API skills
+
+Agent Skills for building with the HeartBank® APIs: how to add each one to an app, with the rules that come with it.
+
+| Skill | What it teaches |
+|---|---|
+| [`log-in-with-heartbank`](skills/log-in-with-heartbank/SKILL.md) | Add Log in with HeartBank®: passkey log-in, and a log-out that ends both sessions |
+| [`thank-with-heartbank`](skills/thank-with-heartbank/SKILL.md) | Add Thank with HeartBank®: prepare, the person's own press, commit |
+| [`sign-with-heartbank`](skills/sign-with-heartbank/SKILL.md) | Let people sign what they made with Sign with HeartBank® (B-Origin℠) |
+| [`verify-with-heartbank`](skills/verify-with-heartbank/SKILL.md) | Check a record, a receipt and the zero-sum proof from the public logs |
+| [`look-up-with-heartbank`](skills/look-up-with-heartbank/SKILL.md) | Look up one exact @name and what its public page shows |
+
+**An agent can do everything except the press.** Every thank and every signature needs the person's own passkey, so an agent can write the whole integration and still cannot make a thank or a signature for anyone.
+
+## Using them
+
+- **With the MCP server.** Add `https://developers.333.eco/mcp` to your agent as a remote MCP server (streamable HTTP). It serves these same skills as `skill://` resources (the MCP Skills extension, SEP-2640), each file with its SHA-256 digest and size, alongside public, read-only tools.
+- **Without it.** Copy a skill's folder into your agent's skills directory (for Claude Code, `.claude/skills/`). Each folder is a standard Agent Skill: a `SKILL.md` with `name` and `description`.
+
+These files are the same bytes the MCP server serves; a change is made there first and published here unchanged.
+
+## License
+
+Your choice of CC0 1.0 (no rights reserved) or Apache 2.0: see `LICENSE`. Each skill's frontmatter says the same, so a copied folder carries it. Neither grants any right in the HeartBank® or other trademarks, which are not licensed here.
+
+## More
+
+The docs: https://developers.333.eco · everything for agents in one file: https://developers.333.eco/llms.txt
+
+HeartBank® is a data bank of gratitude. It is not a chartered bank or financial institution; it does not provide banking services, hold deposits, or extend credit. No money moves through these APIs.
