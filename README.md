@@ -9,6 +9,7 @@ Agent Skills for building with the HeartBank® APIs: how to add each one to an a
 | [`sign-with-heartbank`](skills/sign-with-heartbank/SKILL.md) | Let people sign what they made with Sign with HeartBank® (B-Origin℠) |
 | [`verify-with-heartbank`](skills/verify-with-heartbank/SKILL.md) | Check a record, a receipt and the zero-sum proof from the public logs |
 | [`look-up-with-heartbank`](skills/look-up-with-heartbank/SKILL.md) | Look up one exact @name and what its public page shows |
+| [`confirm-with-heartbank`](skills/confirm-with-heartbank/SKILL.md) | Add Confirm with HeartBank®: one passkey press for one named action |
 
 **An agent can do everything except the press.** Every thank and every signature needs the person's own passkey, so an agent can write the whole integration and still cannot make a thank or a signature for anyone.
 
