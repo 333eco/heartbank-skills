@@ -69,7 +69,8 @@ Anyone can sign a mail at https://sign.333.eco/b-mail, with no key and no accoun
 - **Fields:** `to`, `cc`, `subject`, `body`, `from`, `fromname`, `name` (their @name) and `made`, one of `digitalCreation`, `humanEdits`, `composite`, `compositeSynthetic` or `trainedAlgorithmicMedia`. Percent-encode each value. If you drafted the words, say so: `made=trainedAlgorithmicMedia`, or `compositeSynthetic` when the person wrote part.
 - **The person reads and may change every word.** The page says a link filled it in, shows exactly what the press will sign, and makes a random salt of its own, so your link never knows the fingerprint.
 - **Nothing comes back to you.** The page gives the signed message to the person alone. If you send mail for them, ask them to paste it back, and send exactly that: from the same address, to the same people, with the same subject, and with no files attached (attachments are not signed yet). A changed message shows its readers a mark that doesn't match.
-- **Say what it shows, and only that:** a passkey signed these exact words. ⛔ Never that a person wrote them, and never "verified".
+- **Say what it shows, and only that:** a passkey signed these exact words. ⛔ Never that a person wrote them or pressed, and never "verified".
+- ⛔ **Never hold a passkey for a person, and never press for one.** A passkey kept in software can press with nobody there, so nothing in the signature would show it; the only thing that keeps a signed mail honest is that the key stays with the person.
 - To check one you received, see the `verify-with-heartbank` skill.
 
 ## B-Trace℠: what a file carries, from your server

@@ -8,7 +8,7 @@ license: CC0-1.0 OR Apache-2.0
 
 Confirm with HeartBank® asks a person your app already knows to press their own passkey for one action your app names. Your server gets a yes it can check once. Nothing is kept: no public record and no history line.
 
-**An agent can do everything except the press.** That is exactly what this API is for: the press is the one step no script and no agent can take for a person.
+**An agent can do everything except the press.** That is what this API is for: a press with the person's own passkey, which no tool here makes for them. ⚠️ It is presence only as far as the device's own check goes: a passkey kept in software can press with nobody there.
 
 ## The rules that come with it
 
