@@ -23,7 +23,7 @@ Sign with HeartBank® lets a person sign what they made, with their own passkey,
 
 ## Steps
 
-1. **Ask to be a caller.** Signing identifies your app by the browser's origin, so your site and one return page are added by hand: ask on https://developers.333.eco/dashboard. ⏳ Signing from a native app is not built.
+1. **Ask to be a caller.** Signing identifies your app by the browser's origin and by your server's key, so your site and one return page are added by hand: ask on https://developers.333.eco/dashboard. ⏳ Signing from a native app is not built.
 2. **Install the package:** `npm install @333eco/origin-attest`.
 3. **The button.** Export the file once, and pass that same file:
 
@@ -36,9 +36,26 @@ await beginSign(await exportPng(), {
   tool: "my-editor",                                   // your registered name
   source: sourceFromHistory({ imports, mostly: 0.8 }), // how it was made, from your own history
   rights: "CC0-1.0",                                   // optional
+  vouch: (claim) => fetch("/api/vouch", { method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ sha256: claim.sha256, tool: claim.tool }) }).then((r) => r.text()), // your server signs for this file
 });
 // The person is now on sign.333.eco, which shows what they are signing and who asked. The file waits on their device, in IndexedDB.
 // If this throws, nothing was signed: let them download anyway.
+```
+
+   **Your server vouches for each file.** The browser's origin names your app, and your server proves it asked: without the assertion below, sign.333.eco refuses the request (`unsigned`), and an app with no server key on file is refused (`no_key`). Give your app a server key URL on its dashboard page.
+
+```js
+import { SignJWT } from "jose";
+
+// POST /api/vouch on YOUR server, for someone you let sign (signed in to your app; limit how often).
+// privateKey: the ES256 key whose public half is at your app's server key URL (jwks_uri); kid: its id there.
+const assertion = await new SignJWT({ sha256, tool })          // the two values your page sent, for this one file
+  .setProtectedHeader({ alg: "ES256", kid })
+  .setIssuer(SITE_ORIGIN)                                      // your website's origin, exactly as on your dashboard
+  .setAudience("https://sign.333.eco/sign/par")
+  .setIssuedAt().setExpirationTime("60s")                      // no more than 120 seconds
+  .sign(privateKey);
 ```
 
 4. **The return page,** in the browser:
