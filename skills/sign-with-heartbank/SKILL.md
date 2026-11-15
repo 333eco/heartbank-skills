@@ -60,6 +60,18 @@ const pack = await packFor(back.index);   // { waiting: true } until the checkpo
 
 6. **Checking a record is free, forever,** with no account: see the `verify-with-heartbank` skill, or `npx @333eco/origin-verify`.
 
+## A mail: hand someone a draft to sign (B-Mail)
+
+Anyone can sign a mail at https://sign.333.eco/b-mail, with no key and no account: they write it, press their passkey over the exact words, and send it from their own mail app. You can hand a person a draft with a link shaped like `mailto:`. Everything after the `#` stays in their browser.
+
+`https://sign.333.eco/b-mail#to=dara%40example.com&subject=Lunch%20on%20Friday&body=Shall%20we%20meet%20at%20noon%3F&made=trainedAlgorithmicMedia`
+
+- **Fields:** `to`, `cc`, `subject`, `body`, `from`, `fromname`, `name` (their @name) and `made`, one of `digitalCreation`, `humanEdits`, `composite`, `compositeSynthetic` or `trainedAlgorithmicMedia`. Percent-encode each value. If you drafted the words, say so: `made=trainedAlgorithmicMedia`, or `compositeSynthetic` when the person wrote part.
+- **The person reads and may change every word.** The page says a link filled it in, shows exactly what the press will sign, and makes a random salt of its own, so your link never knows the fingerprint.
+- **Nothing comes back to you.** The page gives the signed message to the person alone. If you send mail for them, ask them to paste it back, and send exactly that: from the same address, to the same people, with the same subject, and with no files attached (attachments are not signed yet). A changed message shows its readers a mark that doesn't match.
+- **Say what it shows, and only that:** a passkey signed these exact words. ⛔ Never that a person wrote them, and never "verified".
+- To check one you received, see the `verify-with-heartbank` skill.
+
 ## B-Trace℠: what a file carries, from your server
 
 `POST https://origin.333.eco/api/v1/trace`, with the file as the body (up to 25 MB) and your business's API key as a bearer token. The answer lists the file's B-Origin records, its C2PA manifest and IPTC fields, generator markers and watermarks found, and `notChecked`, what the answer did not look for.
