@@ -29,12 +29,12 @@ Thank with HeartBank® records a thank on the gratitude ledger. Your app never w
 ## Steps
 
 1. **Log the person in** with Log in with HeartBank® and the `ledger` scope (it needs review), which gives your server their `pid_token`.
-2. **Prepare** on your server: `POST https://ledger.heartbank.net/v1/prepare`. Your server proves itself in the `x-client-assertion` header with a fresh ES256 JWT (`iss` = `sub` = your client id, `aud` = `https://ledger.heartbank.net`, at most 5 minutes old, a `jti` never used before). ⛔ Never from a browser or a phone. Give each thank your own `ref`: the same `ref` returns the same answer and writes once. The answer is `{pending, ticket}`, or `{"written": false}`. At most 6 prepares a minute per person.
+2. **Prepare** on your server: `POST https://ledger.333.eco/v1/prepare`. Your server proves itself in the `x-client-assertion` header with a fresh ES256 JWT (`iss` = `sub` = your client id, `aud` = `https://ledger.333.eco`, at most 5 minutes old, a `jti` never used before). ⛔ Never from a browser or a phone. Give each thank your own `ref`: the same `ref` returns the same answer and writes once. The answer is `{pending, ticket}`, or `{"written": false}`. At most 6 prepares a minute per person.
 3. **The person presses.** Send their browser to `https://sign.333.eco/press#ticket=…&return_to=…&state=…`. The page names your app and shows them exactly what they are signing, and they press their passkey. Their browser comes back to your `return_to` with `#press=…&state=…`.
 4. **Exchange the press** on your server: `POST https://login.333.eco/press/wrap`, form field `result`, for a `pressToken`. A press is not a log-in.
-5. **Commit**: `POST https://ledger.heartbank.net/v1/commit` with `ref`, `pending` and `pressToken`. The answer is `{written: true, receipt: {id}}`, or `{"written": false}`. It is safe to retry: the answer is kept under `ref`.
-6. **Optionally place it on the public map**, later than the thank so the time doesn't point at it: `POST https://ledger.heartbank.net/v1/place` with the one-use token the commit returned for that side and a cell about 100 km across. There is no field for a coordinate.
-7. **Read a ring** for the logged-in person: `GET https://ledger.heartbank.net/v1/aura`. A color and a width per ledger your app may read; no balance, no count.
+5. **Commit**: `POST https://ledger.333.eco/v1/commit` with `ref`, `pending` and `pressToken`. The answer is `{written: true, receipt: {id}}`, or `{"written": false}`. It is safe to retry: the answer is kept under `ref`.
+6. **Optionally place it on the public map**, later than the thank so the time doesn't point at it: `POST https://ledger.333.eco/v1/place` with the one-use token the commit returned for that side and a cell about 100 km across. There is no field for a coordinate.
+7. **Read a ring** for the logged-in person: `GET https://ledger.333.eco/v1/aura`. A color and a width per ledger your app may read; no balance, no count.
 
 Field-by-field detail, and every error, is in the reference, generated from the same source as the API's own description: https://developers.333.eco/thank.
 
