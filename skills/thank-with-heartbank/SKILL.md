@@ -46,7 +46,7 @@ Field-by-field detail, and every error, is in the reference, generated from the 
 - **Your app is in it** once it has asked for Log in on the dashboard (approval isn't needed there). The sandbox knows it by its Log-in client id (`hbc_…`) and checks its assertions against the key URL it registered.
 - **Test persons** in place of a log-in: `POST https://sandbox.333.eco/persons` with `{"label": "Alice"}` (your assertion in `x-client-assertion`, `aud` = the exact address called) gives `{id, label, sub, pidToken}`; `GET /persons` lists them with fresh tokens. Or the app's Sandbox card on the dashboard, or the developer tool `sandbox_add_person`. At most 20 per app.
 - **The press, here only, can come from code:** `POST https://sandbox.333.eco/press/api` with `{ticket, person}` gives the `result` the page would bring back; or the developer tool `sandbox_press`. Then `/press/wrap` and commit as above.
-- A season a week: every Monday 00:00–00:15 UTC nothing is written, then the thanks, the places and the log are wiped. Test persons stay. At most 1,000 prepares per app per UTC day.
+- A season a week: every Monday 00:00–00:15 UTC nothing is written while last week's log gets its last checkpoint, then the thanks and the places are wiped and a new log begins. Each week's log is its own, named `sandbox.333.eco/log/<its Monday>` as its receipts name it, and kept 7 days after the week. Test persons stay. At most 1,000 prepares per app per UTC day.
 - ⛔ Nothing made in the sandbox works anywhere else, and a sandbox press can't even be read by the permanent ledger. Change the base address only when your app is admitted.
 
 ## Check your work
