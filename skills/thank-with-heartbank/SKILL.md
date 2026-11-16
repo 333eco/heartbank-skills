@@ -8,7 +8,7 @@ license: CC0-1.0 OR Apache-2.0
 
 Thank with HeartBank® records a thank on the gratitude ledger. Your app never writes a thank alone: the person signs every thank with their own passkey, so no app and no agent can manufacture gratitude.
 
-**An agent can do everything except the press.** You can write the whole integration, prepare and commit; the press is always the person's own.
+**An agent can do everything except the press.** You can write the whole integration, prepare and commit; the press is always the person's own. (The one exception is the sandbox below, where a test passkey presses for a test person, who is nobody.)
 
 ## Who can write today
 
@@ -18,7 +18,7 @@ Thank with HeartBank® records a thank on the gratitude ledger. Your app never w
 
 ## The rules that come with it
 
-- **The press is the person's.** No test, script, agent or server presses for anyone. If your design needs a thank without the person's press, the design is wrong.
+- **The press is the person's.** No test, script, agent or server presses for a real person. If your design needs a thank without the person's press, the design is wrong. The sandbox is the one place a press isn't a person's, and nothing made there works anywhere else.
 - ⛔ **Never pre-fill a thank.** The person starts it and chooses whom to thank. No thank prepared before they ask for one, no recipient chosen for them, no box already ticked, and never a thank that happens by default unless they opt out.
 - ⛔ **No counts, streaks or countdowns on screen.** Never show how many thanks someone gave or received, never a streak, never a time left until anything. A person's ring is a color and a width: draw it as a ring, never as a number to chase. <!-- sig-ok: a prohibition (Sig-8) -->
 - **A refusal says nothing.** When the ledger declines, the answer is only `{"written": false}`: no reason, no count, no next time. It protects the people involved, and it is not a bug. Tell the person once, plainly, that the thank wasn't recorded. Never guess a reason, never show a wait, and never retry in a loop.
@@ -37,6 +37,17 @@ Thank with HeartBank® records a thank on the gratitude ledger. Your app never w
 7. **Read a ring** for the logged-in person: `GET https://ledger.333.eco/v1/aura`. A color and a width per ledger your app may read; no balance, no count.
 
 Field-by-field detail, and every error, is in the reference, generated from the same source as the API's own description: https://developers.333.eco/thank.
+
+## Try it in the sandbox first
+
+`https://sandbox.333.eco` runs the ledger's own code, with test persons and test passkeys. Nothing in it is real. Docs: https://developers.333.eco/sandbox.
+
+- **The same calls, another address:** `https://sandbox.333.eco/ledger/v1/prepare`, `/commit`, `/place`, `/aura` (your assertion's `aud` is `https://sandbox.333.eco/ledger`), and `https://sandbox.333.eco/press/hint`, `/press` (the page) and `/press/wrap` in place of login.333.eco's and sign.333.eco's. Same requests, same answers, and refusals just as silent.
+- **Your app is in it** once it has asked for Log in on the dashboard (approval isn't needed there). The sandbox knows it by its Log-in client id (`hbc_…`) and checks its assertions against the key URL it registered.
+- **Test persons** in place of a log-in: `POST https://sandbox.333.eco/persons` with `{"label": "Alice"}` (your assertion in `x-client-assertion`, `aud` = the exact address called) gives `{id, label, sub, pidToken}`; `GET /persons` lists them with fresh tokens. Or the app's Sandbox card on the dashboard, or the developer tool `sandbox_add_person`. At most 20 per app.
+- **The press, here only, can come from code:** `POST https://sandbox.333.eco/press/api` with `{ticket, person}` gives the `result` the page would bring back; or the developer tool `sandbox_press`. Then `/press/wrap` and commit as above.
+- A season a week: every Monday 00:00–00:15 UTC nothing is written, then the thanks, the places and the log are wiped. Test persons stay. At most 1,000 prepares per app per UTC day.
+- ⛔ Nothing made in the sandbox works anywhere else, and a sandbox press can't even be read by the permanent ledger. Change the base address only when your app is admitted.
 
 ## Check your work
 
