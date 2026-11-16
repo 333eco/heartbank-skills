@@ -1,0 +1,12 @@
+{
+  "name": "heartbank",
+  "description": "HeartBank®'s plugin for building with its APIs.",
+  "owner": { "name": "HeartBank®" },
+  "plugins": [
+    {
+      "name": "heartbank",
+      "source": "./",
+      "description": "Six skills for the HeartBank® APIs and the developers.333.eco MCP server."
+    }
+  ]
+}

@@ -15,6 +15,7 @@ Agent Skills for building with the HeartBank® APIs: how to add each one to an a
 
 ## Using them
 
+- **As a Claude Code plugin.** This repo is a plugin and its own marketplace: run `/plugin marketplace add 333eco/heartbank-skills`, then `/plugin install heartbank@heartbank` (in a shell: `claude plugin marketplace add 333eco/heartbank-skills` and `claude plugin install heartbank@heartbank`). The skills arrive as `heartbank:<skill>`, and the MCP server below as `heartbank`. Its public tools work at once; the tools for your own developer apps ask you to connect it once with your passkey (`/mcp`, then Authenticate). On claude.ai, installing the plugin doesn't add the server: add `https://developers.333.eco/mcp` on the Connectors tab.
 - **With the MCP server.** Add `https://developers.333.eco/mcp` to your agent as a remote MCP server (streamable HTTP). It serves these same skills as `skill://` resources (the MCP Skills extension, SEP-2640), each file with its SHA-256 digest and size, alongside public, read-only tools.
 - **Without it.** Copy a skill's folder into your agent's skills directory (for Claude Code, `.claude/skills/`). Each folder is a standard Agent Skill: a `SKILL.md` with `name` and `description`.
 
