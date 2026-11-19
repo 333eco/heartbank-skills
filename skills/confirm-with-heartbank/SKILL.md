@@ -1,6 +1,6 @@
 ---
 name: confirm-with-heartbank
-description: Add Confirm with HeartBank® to an app, one passkey press for one named action by a person the app already knows from Log in with HeartBank®, a human in the loop so the app knows the person, not a script, did it. Use when a developer wants a person to confirm an action such as an upload with their own passkey, redeem the result on their server, or decide between Confirm and Sign. Nothing is kept, and the press page shows only words HeartBank® wrote.
+description: Add Confirm with HeartBank® to an app, one passkey press for one named action by a person the app already knows from Log in with HeartBank®, so the app gets a fresh press of that person's own passkey for exactly that action (a press shows a passkey, never that a person pressed). Use when a developer wants a person to confirm an action such as an upload with their own passkey, redeem the result on their server, or decide between Confirm and Sign. Nothing is kept, and the press page shows only words HeartBank® wrote.
 license: CC0-1.0 OR Apache-2.0
 ---
 
