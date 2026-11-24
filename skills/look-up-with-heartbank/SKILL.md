@@ -16,6 +16,7 @@ Look up with HeartBank® answers one exact `@name` with what that person's page 
 - **One answer for every name with no page.** A name nobody holds, a name held with no page and a name let go all get the same `404`. ⛔ Never tell anyone a name is free to claim, has lapsed or was let go because of it.
 - **`searchable` is the holder's choice.** When it is `false`, show the name only to someone who already typed it, and never put it in a list or an index of your own.
 - **`lang` is shown only because they chose to.** Write to them in it. A `null` says nothing about what they read: ⛔ never guess a language from a name, a photo or a place.
+- **Show their autograph only as a drawing.** When `autograph` is there, it is their B-Autograph℠, drawn by hand and shown by their own choice. Draw its strokes as they are. Anyone can copy a drawing: never use it to check who someone is, and never compare it with another.
 - **Say their name the way they say it.** When `voice` is there, it is their own recording of their name: play it rather than a synthesized guess.
 - **`keys` says which passkey signs as this name, never who held it.** An empty list says nothing at all: ⛔ never show a person as "unverified" because of it, and never call anyone "verified".
 - **60 lookups a minute per address.** More are refused with a `429` and a `Retry-After`: wait that long, never retry in a loop. A change the holder saves shows within a minute, so don't keep an answer long.
@@ -24,7 +25,7 @@ Look up with HeartBank® answers one exact `@name` with what that person's page 
 ## Steps
 
 1. **Look it up:** `GET https://333.eco/api/v1/names/{name}`, or the MCP tool `lookup_by_name`. The name may come with or without `@`; the registry folds case and punctuation, so `sokha.keo`, `SOKHA-KEO` and `sokhakeo` are one name.
-2. **Use what comes back:** `name` (in the form its holder chose, with `@`) · `page` (link to it) · `said` (what they are called, as they wrote it, in any script) · `line` · `links` (up to three) · `photo` · `voice` · `searchable` · `keys` · `lang`.
+2. **Use what comes back:** `name` (in the form its holder chose, with `@`) · `page` (link to it) · `said` (what they are called, as they wrote it, in any script) · `line` · `links` (up to three) · `photo` · `voice` · `autograph` (strokes on a 100 × 60 pad) · `searchable` · `keys` · `lang`.
 3. **To check a B-Mail's passkey against the name it claims,** use the MCP tool `check_statement`, which reads `keys` for you (see the `verify-with-heartbank` skill). If the passkey that signed is listed, and the mail was signed before that key's `until`, it was signed with this name's passkey. That still says which passkey, never who held it.
 
 ## Check your work
