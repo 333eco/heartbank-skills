@@ -20,11 +20,13 @@ Log in with HeartBank® proves who someone is, with a passkey. There are no pass
 - **`poh` is the person's to release.** It appears only with the `poh` scope and their consent (today `["passkey"]`), and it is absent otherwise, never `false`. ⛔ Never label a person "verified" in your own words; if you show their status, use the passkey mark from the badge kit.
 - **`/session/state` is display only.** Use it to choose between a Log in and a Log out button; never trust it for anything else.
 - **No refresh tokens.** Log the person in again, or keep your own session.
-- **Nothing unbuilt is promised.** Self-serve registration is approved but not built: apps are added on the dashboard and reviewed by hand.
+- **Only log-in comes without a review.** An app can register without a form for log-in alone (scope `openid`). `poh`, `ledger`, Sign, Confirm and Thank need an app added on the dashboard and a review by hand. ⛔ Never tell a developer those work at once.
 
 ## Steps
 
-1. **Register the app.** Add it at https://developers.333.eco/dashboard, under a business, with the address of your server's public keys (a JWKS). It works once it is approved. The `poh` and `ledger` scopes need their own review.
+1. **Register the app, one of two ways.**
+   - **On the dashboard:** add it at https://developers.333.eco/dashboard, under a business, with the address of your server's public keys (a JWKS). It works once it is approved. The `poh` and `ledger` scopes need their own review.
+   - **Without a form, for log-in alone:** publish a JSON file on the app's own site and use that file's https address (a host name, no port) as the client id. The file lists `client_id` (that same address), `client_name`, `redirect_uris` and `jwks_uri`, with `token_endpoint_auth_method` set to `private_key_jwt`. Every redirect and the keys are on the same host as the file. Login reads it again at least every five minutes, so whoever controls that site is the app. Leave the `refresh_token` grant out: a file that asks for it is read as an agent tool, which can't log anyone in. The rest of these steps, FAPI 2.0 included, are the same.
 2. **Read the discovery document**, https://login.333.eco/.well-known/openid-configuration (MCP tool `log_in_discovery`). Everything a library needs is there, and it is the authority if anything here disagrees.
 3. **Check the library supports all of this:** the authorization code flow with scope `openid` (add `poh` for the proof-of-personhood layers) · pushed authorization requests (PAR), required · PKCE `S256` · client authentication `private_key_jwt`, ES256 · DPoP, required, ES256 · ID tokens ES256. Many older OpenID libraries lack PAR or DPoP.
 4. **Use a library that has been run against the real provider**, and only these: `openid-client` 6.8.9 for Node.js (no extra code) · `Authlib` 1.9.2 for Python (you write PAR and DPoP by hand; full sample at https://developers.333.eco/python-authlib.py) · `@333eco/firebase-bridge` to turn the ID token into a custom token in your own Firebase project.
