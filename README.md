@@ -29,4 +29,4 @@ Your choice of CC0 1.0 (no rights reserved) or Apache 2.0: see `LICENSE`. Each s
 
 The docs: https://developers.333.eco · everything for agents in one file: https://developers.333.eco/llms.txt
 
-HeartBank® is a data bank of gratitude. It is not a chartered bank or financial institution; it does not provide banking services, hold deposits, or extend credit. No money moves through these APIs.
+HeartBank® is a planetary data bank of gratitude. It is not a chartered bank or financial institution; it does not provide banking services, hold deposits, or extend credit. No money moves through these APIs.
