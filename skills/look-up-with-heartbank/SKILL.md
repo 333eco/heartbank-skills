@@ -1,6 +1,6 @@
 ---
 name: look-up-with-heartbank
-description: Look up one exact @name on B-Registry℠ with Look up with HeartBank® and get exactly what that person's public page already shows, the name as they wrote it, their one line and links, their photo, their own recording of their name, the language they chose to show, and the passkeys that sign as that name. Free, with no key. Use when an app needs to show or say a name the way its holder wrote it, link to their page, write to them in the language they chose, or check a B-Mail's passkey against the name it was signed as.
+description: Look up one exact @name or free address on B-Registry℠ with Look up with HeartBank® and get exactly what that person's public page already shows, the name as they wrote it, their one line and links, their photo, their own recording of their name, the language they chose to show, and the passkeys that sign as that name. Free, with no key. Use when an app needs to show or say a name the way its holder wrote it, link to their page, write to them in the language they chose, or check a B-Mail's passkey against the name it was signed as.
 license: CC0-1.0 OR Apache-2.0
 ---
 
@@ -20,7 +20,7 @@ Look up with HeartBank® answers one exact `@name` with what that person's page 
 - **Say their name the way they say it.** When `voice` is there, it is their own recording of their name: play it rather than a synthesized guess.
 - **`keys` says which passkey signs as this name, never who held it.** An empty list says nothing at all: ⛔ never show a person as "unverified" because of it, and never call anyone "verified".
 - **60 lookups a minute per address.** More are refused with a `429` and a `Retry-After`: wait that long, never retry in a loop. A change the holder saves shows within a minute, so don't keep an answer long.
-- **@names and free addresses.** A person with no @name has a free address, `B:7K3M-9XD2-QH4N`, which works the same way (exact, the `B:` required). `#tag` names have no public record yet.
+- **@names and free addresses.** Every person has a free address, `B:7K3M-9XD2-QH4N`, which works the same way (exact, the `B:` required); one whose holder sends visitors to their @name answers that name's page. An address lists its own passkeys too, each with the `salt` of its record's line (b-poh-statements v1.9). `#tag` names have no public record yet.
 
 ## Steps
 
